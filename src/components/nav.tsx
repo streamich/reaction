@@ -26,7 +26,7 @@ interface NavBarProps extends React.Props<HTMLDivElement> {
   logoLink?: string
 }
 
-const NavBar: React.SFC<NavBarProps> = props =>
+const NavBar = props =>
   <Nav>
     <NavIcon href={props.logoLink}>
       <Icon name="logo" color="black" fontSize="32px" />
