@@ -241,7 +241,7 @@ exports[`Video Cover matches the snapshot 1`] = `
     >
       <div
         className="c10"
-        onClick={undefined}
+        onClick={[Function]}
       >
         <svg
           className="c11 c12"
@@ -548,7 +548,7 @@ exports[`Video Cover matches the snapshot with edit props 1`] = `
     >
       <div
         className="c10"
-        onClick={undefined}
+        onClick={[Function]}
       >
         <svg
           className="c11 c12"
