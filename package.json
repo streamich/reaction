@@ -6,7 +6,12 @@
   "repository": "https://github.com/artsy/reaction.git",
   "author": "Eloy Durán <eloy.de.enige@gmail.com>",
   "license": "MIT",
-  "files": ["assets", "data", "dist", "docs"],
+  "files": [
+    "assets",
+    "data",
+    "dist",
+    "docs"
+  ],
   "engines": {
     "node": "8.x.x",
     "npm": "5.4.x"
@@ -21,7 +26,7 @@
     "compile": "babel src --out-dir dist --copy-files -s --source-map --extensions '.js,.jsx,.ts,.tsx' --ignore src/**/__tests__,src/**/__stories__",
     "deploy-storybook": "yarn relay && NODE_ENV=production storybook-to-ghpages",
     "lint": "tslint -c tslint.json --project tsconfig.json",
-    "prepare": "patch-package",
+    "prepare": "yarn run snyk-protect && patch-package",
     "precommit": "lint-staged",
     "prepublishOnly": "yarn clean && yarn relay && yarn compile",
     "prepush": "yarn run type-check",
@@ -38,7 +43,8 @@
     "test:watch": "jest --watch --runInBand",
     "type-check": "tsc --noEmit --pretty",
     "watch": "concurrently --kill-others 'yarn relay --watch' 'yarn compile -w'",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "snyk-protect": "snyk protect"
   },
   "resolutions": {
     "babel-loader": "8.0.0-beta.0",
@@ -138,7 +144,8 @@
     "react-waypoint": "^7.3.3",
     "relay-runtime": "https://github.com/alloy/relay/releases/download/v1.5.0-artsy.3/relay-runtime-1.5.0-artsy.3.tgz",
     "sharify": "^0.1.6",
-    "superagent": "^3.6.3"
+    "superagent": "^3.6.3",
+    "snyk": "^1.316.1"
   },
   "prettier": {
     "semi": false,
@@ -151,14 +158,32 @@
       ".(ts|tsx)": "typescript-babel-jest"
     },
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$",
-    "testPathIgnorePatterns": ["<rootDir>/dist/", "<rootDir>/externals/"],
-    "moduleFileExtensions": ["ts", "tsx", "js"],
-    "modulePathIgnorePatterns": ["<rootDir>/dist/*"],
-    "setupFiles": ["raf/polyfill", "./src/setup_jest.ts"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/externals/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/*"
+    ],
+    "setupFiles": [
+      "raf/polyfill",
+      "./src/setup_jest.ts"
+    ]
   },
   "lint-staged": {
-    "*.@(ts|tsx)": ["tslint --fix", "yarn prettier-write --", "git add"],
-    "*.json": ["yarn prettier-write --"]
+    "*.@(ts|tsx)": [
+      "tslint --fix",
+      "yarn prettier-write --",
+      "git add"
+    ],
+    "*.json": [
+      "yarn prettier-write --"
+    ]
   },
   "release": {
     "analyzeCommits": {
@@ -186,5 +211,6 @@
         }
       ]
     }
-  }
+  },
+  "snyk": true
 }
